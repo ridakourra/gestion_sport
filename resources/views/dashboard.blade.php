@@ -1,0 +1,106 @@
+<x-app-layout>
+    <div class="flex-1 p-8">
+        <h1 class="text-3xl font-bold mb-8">Dashboard</h1>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Teams -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Total Teams</p>
+                        <p class="text-2xl font-bold">24</p>
+                    </div>
+                    <i class="fas fa-users text-purple-500 text-3xl"></i>
+                </div>
+            </div>
+
+            <!-- Total Players -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Total Players</p>
+                        <p class="text-2xl font-bold">120</p>
+                    </div>
+                    <i class="fas fa-user-friends text-purple-500 text-3xl"></i>
+                </div>
+            </div>
+
+            <!-- Upcoming Matches -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Upcoming Matches</p>
+                        <p class="text-2xl font-bold">5</p>
+                    </div>
+                    <i class="fas fa-calendar-alt text-purple-500 text-3xl"></i>
+                </div>
+            </div>
+
+            <!-- Total Sports -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Total Sports</p>
+                        <p class="text-2xl font-bold">8</p>
+                    </div>
+                    <i class="fas fa-football-ball text-purple-500 text-3xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="mb-8">
+            <h2 class="text-xl font-bold mb-4">Quick Actions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <i class="fas fa-plus text-purple-500 text-2xl mb-2"></i>
+                    <p class="font-semibold">Add New Team</p>
+                </a>
+                <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <i class="fas fa-user-plus text-purple-500 text-2xl mb-2"></i>
+                    <p class="font-semibold">Add New Player</p>
+                </a>
+                <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <i class="fas fa-calendar-plus text-purple-500 text-2xl mb-2"></i>
+                    <p class="font-semibold">Schedule Match</p>
+                </a>
+                <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <i class="fas fa-trophy text-purple-500 text-2xl mb-2"></i>
+                    <p class="font-semibold">Update Rankings</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Recent Matches -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">Recent Matches</h2>
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="border-b">
+                        <th class="py-2">Match</th>
+                        <th class="py-2">Date</th>
+                        <th class="py-2">Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b">
+                        <td class="py-2">Team A vs Team B</td>
+                        <td class="py-2">2023-10-15</td>
+                        <td class="py-2">2-1</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-2">Team C vs Team D</td>
+                        <td class="py-2">2023-10-14</td>
+                        <td class="py-2">0-0</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-2">Team E vs Team F</td>
+                        <td class="py-2">2023-10-13</td>
+                        <td class="py-2">3-2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</x-app-layout>
