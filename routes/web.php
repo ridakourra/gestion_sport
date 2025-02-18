@@ -20,7 +20,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('joueurs', JoueurController::class);
     // matches
     Route::resource('matches', MatcheController::class);
-    
     // classement
     Route::resource('classements', ClassementController::class);
     
