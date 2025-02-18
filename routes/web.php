@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     // dashboard
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-
     // sports
     Route::resource('sports', SportController::class);
     // equipes

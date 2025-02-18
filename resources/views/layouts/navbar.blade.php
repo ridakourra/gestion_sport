@@ -37,10 +37,13 @@
             </a>
         </li>
         <li class="mb-2">
-            <a href="{{route('logout')}}" class="flex items-center p-2 text-gray-900 hover:text-white hover:bg-purple-700 rounded">
-                <i class="fas fa-sign-out-alt mr-3"></i>
-                Logout
-            </a>
+           <form action="{{route('logout')}}" class="flex items-center p-2 text-gray-900 hover:text-white hover:bg-purple-700 rounded" method="POST">
+                @csrf
+                <button >
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    Logout
+                </button>
+           </form>
         </li>
     </ul>
 </nav>

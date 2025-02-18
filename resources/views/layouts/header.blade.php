@@ -19,8 +19,14 @@
     
         <!-- Dropdown Menu -->
         <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg hidden">
-            <a href="#" class="block px-3 py-2 text-gray-700 hover:bg-purple-100">Go to Profile</a>
-            <a href="#" class="block px-3 py-2 text-gray-700 hover:bg-purple-100">Logout</a>
+            <a href="{{route('profile.edit')}}" class="block px-3 py-2 text-gray-700 hover:bg-purple-100">Profile</a>
+            <form action="{{route('logout')}}" class="block px-3 py-2 text-gray-700 hover:bg-purple-100" method="POST">
+                @csrf
+                <button >
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+           </form>
         </div>
     </div>
     
