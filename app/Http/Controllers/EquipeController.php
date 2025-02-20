@@ -41,7 +41,7 @@ class EquipeController extends Controller
             'points' => 0,
             'rang' => Equipe::count()
         ]);
-        return redirect()->route('equipes.index');
+        return redirect()->route('equipes.index')->with('success', 'Equipe created successfully!');
     }
 
     /**
@@ -71,7 +71,7 @@ class EquipeController extends Controller
         ]);
         $equipe->update($vars);
         $equipe->save();
-        return redirect()->route('equipes.index');
+        return redirect()->route('equipes.index')->with('success', 'Sport updated successfully!');
     }
 
     /**
@@ -80,6 +80,6 @@ class EquipeController extends Controller
     public function destroy(Equipe $equipe)
     {
         $equipe->delete();
-        return redirect()->route('equipes.index');
+        return redirect()->route('equipes.index')->with('success', 'Sport deleted successfully!');
     }
 }

@@ -9,7 +9,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500">Total Teams</p>
-                        <p class="text-2xl font-bold">24</p>
+                        <p class="text-2xl font-bold">{{ $totalTeams }}</p>
                     </div>
                     <i class="fas fa-users text-purple-500 text-3xl"></i>
                 </div>
@@ -20,7 +20,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500">Total Players</p>
-                        <p class="text-2xl font-bold">120</p>
+                        <p class="text-2xl font-bold">{{ $totalPlayers }}</p>
                     </div>
                     <i class="fas fa-user-friends text-purple-500 text-3xl"></i>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500">Upcoming Matches</p>
-                        <p class="text-2xl font-bold">5</p>
+                        <p class="text-2xl font-bold">{{ $upcomingMatches }}</p>
                     </div>
                     <i class="fas fa-calendar-alt text-purple-500 text-3xl"></i>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500">Total Sports</p>
-                        <p class="text-2xl font-bold">8</p>
+                        <p class="text-2xl font-bold">{{ $totalSports }}</p>
                     </div>
                     <i class="fas fa-football-ball text-purple-500 text-3xl"></i>
                 </div>
@@ -84,21 +84,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b">
-                        <td class="py-2">Team A vs Team B</td>
-                        <td class="py-2">2023-10-15</td>
-                        <td class="py-2">2-1</td>
-                    </tr>
-                    <tr class="border-b">
-                        <td class="py-2">Team C vs Team D</td>
-                        <td class="py-2">2023-10-14</td>
-                        <td class="py-2">0-0</td>
-                    </tr>
-                    <tr class="border-b">
-                        <td class="py-2">Team E vs Team F</td>
-                        <td class="py-2">2023-10-13</td>
-                        <td class="py-2">3-2</td>
-                    </tr>
+                    {{-- @foreach($recentMatches as $match)
+                        <tr class="border-b">
+                            <td class="py-2">{{ $match->Equipe1->nom }} vs {{ $match->Equipe2->nom }}</td>
+                            <td class="py-2">{{ $match->date_match }}</td>
+                            <td class="py-2">
+                                @if($match->Resultat)
+                                    {{ $match->Resultat->score_equipe1 }} - {{ $match->Resultat->score_equipe2 }}
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                        </tr> --}}
+                    {{-- @endforeach --}}
                 </tbody>
             </table>
         </div>

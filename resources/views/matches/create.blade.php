@@ -16,7 +16,9 @@
                 >
                     <option value="" disabled selected>Select a Sport</option>
                     @foreach($sports as $sport)
-                        <option value="{{ $sport->id }}">{{ $sport->nom }}</option>
+                        <option value="{{ $sport->id }}" {{ old('sport_id') == $sport->id ? 'selected' : '' }}>
+                            {{ $sport->nom }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -34,7 +36,9 @@
                 >
                     <option value="" disabled selected>Select Team 1</option>
                     @foreach($equipes as $equipe)
-                        <option value="{{ $equipe->id }}">{{ $equipe->nom }}</option>
+                        <option value="{{ $equipe->id }}" {{ old('equipe1_id') == $equipe->id ? 'selected' : '' }}>
+                            {{ $equipe->nom }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -52,7 +56,9 @@
                 >
                     <option value="" disabled selected>Select Team 2</option>
                     @foreach($equipes as $equipe)
-                        <option value="{{ $equipe->id }}">{{ $equipe->nom }}</option>
+                        <option value="{{ $equipe->id }}" {{ old('equipe2_id') == $equipe->id ? 'selected' : '' }}>
+                            {{ $equipe->nom }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -63,10 +69,11 @@
                     Match Date @error('date_match') <em class="text-red-500 text-sm">{{ $message }}</em> @enderror
                 </label>
                 <input
-                    type="date"
+                    type="datetime-local"
                     id="date_match"
                     name="date_match"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
+                    value="{{ old('date_match') }}"
                     required
                 />
             </div>
@@ -81,6 +88,7 @@
                     id="lieu"
                     name="lieu"
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
+                    value="{{ old('lieu') }}"
                     required
                 />
             </div>

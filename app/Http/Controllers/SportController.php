@@ -33,7 +33,7 @@ class SportController extends Controller
             'description' => ['nullable'],
         ]);
         Sport::create($vars);
-        return redirect()->route('sports.index');
+        return redirect()->route('sports.index')->with('success', 'Sport created successfully!');
     }
 
     /**
@@ -63,7 +63,7 @@ class SportController extends Controller
         ]);
         $sport->update($vars);
         $sport->save();
-        return redirect()->route('sports.index');
+        return redirect()->route('sports.index')->with('success', 'Sport updated successfully!');
     }
 
     /**
@@ -72,6 +72,6 @@ class SportController extends Controller
     public function destroy(Sport $sport)
     {
         $sport->delete();
-        return redirect()->route('sports.index');
+        return redirect()->route('sports.index')->with('success', 'Sport deteleted successfully!');
     }
 }

@@ -38,7 +38,7 @@ class JoueurController extends Controller
             'equipe_id' => ['nullable', 'exists:equipes,id'],
         ]);
         Joueur::create($vars);
-        return redirect()->route('joueurs.index');
+        return redirect()->route('joueurs.index')->with('success', 'Joueur created successfully!');
     }
 
     /**
@@ -70,7 +70,7 @@ class JoueurController extends Controller
         ]);
         $joueur->update($vars);
         $joueur->save();
-        return redirect()->route('joueurs.index');
+        return redirect()->route('joueurs.index')->with('success', 'Joueur updated successfully!');
     }
 
     /**
@@ -79,6 +79,6 @@ class JoueurController extends Controller
     public function destroy(Joueur $joueur)
     {
         $joueur->delete();
-        return redirect()->route('joueurs.index');
+        return redirect()->route('joueurs.index')->with('success', 'Joueur deleted successfully!');
     }
 }

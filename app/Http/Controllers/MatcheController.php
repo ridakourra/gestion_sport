@@ -6,6 +6,7 @@ use App\Models\Equipe;
 use App\Models\Matche;
 use App\Models\Resultat;
 use App\Models\Sport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MatcheController extends Controller
@@ -15,7 +16,15 @@ class MatcheController extends Controller
      */
     public function index()
     {
-        return view('matches.index', ['matches' => Matche::with('equipe1', 'equipe2', 'sport')->get()]);
+
+        // $matches = Matche::where('statut', 'À venir')->orWhere('statut', 'En cours')->get();
+        // foreach ($matches as $key => $value) {
+        //     $value->update(['statut' => 'test']);
+        //     $value->save();
+        // }
+
+        $matches =  Matche::with('equipe1', 'equipe2', 'sport')->get();
+        return view('matches.index', compact('matches'));
     }
 
     /**
@@ -35,7 +44,7 @@ class MatcheController extends Controller
             'sport_id' => ['required'],
             'equipe1_id' => ['required'],
             'equipe2_id' => ['required'],
-            'date_match' => ['required', 'date'],
+            'date_match' => ['required', 'date','after_or_equal:today'],
             'lieu' => ['required', 'string', 'max:255', 'min:5']
         ]);
         $match = Matche::create($vars);
@@ -44,7 +53,7 @@ class MatcheController extends Controller
             'score_equipe1' => 0,
             'score_equipe2' => 0
         ]);
-        return redirect()->route('matches.index');
+        return redirect()->route('matches.index')->with('success', 'Matche created successfully!');
     }
 
     /**
@@ -77,7 +86,7 @@ class MatcheController extends Controller
         ]);
         $match->update($vars);
         $match->save();
-        return redirect()->route('matches.index');
+        return redirect()->route('matches.index')->with('success', 'Matche updated successfully!');
     }
 
     /**
@@ -86,6 +95,6 @@ class MatcheController extends Controller
     public function destroy(Matche $match)
     {
         $match->delete();
-        return redirect()->route('matches.index');
+        return redirect()->route('matches.index')->with('success', 'Matche deleted successfully!');
     }
 }
