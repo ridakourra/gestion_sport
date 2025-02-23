@@ -33,8 +33,8 @@ class SportController extends Controller
     {
         $validated = $request->validate([
             'nom' => 'required|string|max:255|unique:sports',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         if ($request->hasFile('image')) {
@@ -82,8 +82,8 @@ class SportController extends Controller
     {
         $validated = $request->validate([
             'nom' => 'required|string|max:255|unique:sports,nom,' . $sport->id,
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         if ($request->hasFile('image')) {

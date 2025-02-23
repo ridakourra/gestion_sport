@@ -14,15 +14,24 @@
                         <div class="grid grid-cols-6 gap-6">
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="nom" class="block text-sm font-medium text-gray-700">Name</label>
-                                <input type="text" name="nom" id="nom" autocomplete="nom" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                <input type="text" name="nom" id="nom" autocomplete="nom" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" value="{{ old('nom') }}">
+                                @error('nom')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                                <textarea name="description" id="description" rows="3" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                                <textarea name="description" id="description" rows="3" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
                                 <input type="file" name="image" id="image" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                @error('image')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
