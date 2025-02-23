@@ -3,9 +3,9 @@
     <div class="flex gap-3">
         
         @auth
-            <x-nav-link href="">Dashboard</x-nav-link>
-            <x-nav-link href="">Sports</x-nav-link>
-            <x-nav-link href="">Equipes</x-nav-link>
+            <x-nav-link href="{{route('admin.dashboard')}}">Dashboard</x-nav-link>
+            <x-nav-link href="{{route('sports.index')}}">Sports</x-nav-link>
+            <x-nav-link href="{{route('equipes.index')}}">Equipes</x-nav-link>
             <x-nav-link href="{{route('profile.edit')}}">Profile</x-nav-link>            
             <form action="{{route('logout')}}" method="POST">
                 @csrf
