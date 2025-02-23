@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classement;
 use App\Models\Equipe;
+use App\Models\Matche;
 use App\Models\Sport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -60,7 +62,17 @@ class EquipeController extends Controller
         }
 
         // Create the team
-        Equipe::create($validated);
+        $equipe = Equipe::create($validated);
+        // Push equipe in classement
+        Classement::create([
+            'sport_id' => $validated['sport_id'],
+            'equipe_id' => $equipe->id,
+            'points' => 0,
+            'rang' => 0,
+            'vics' => 0,
+            'los' => 0,
+            'nuls' => 0
+        ]);
 
         // Redirect with success message
         return redirect()
@@ -76,14 +88,20 @@ class EquipeController extends Controller
         // Load relationships and counts
         $equipe->load(['sport', 'joueurs' => function ($query) {
             $query->latest()->take(5);
-        }, 'matches' => function ($query) {
-            $query->with(['equipe1', 'equipe2', 'resultat'])
-                ->latest('date_matche')
-                ->take(5);
         }]);
 
         $joueurs = $equipe->joueurs;
-        $matches = $equipe->matches;
+
+        // Get recent matches for this team
+        $matches = Matche::where(function ($query) use ($equipe) {
+            $query->where('equipe1_id', $equipe->id)
+                ->orWhere('equipe2_id', $equipe->id);
+        })
+            ->with(['equipe1', 'equipe2', 'resultat'])
+            ->latest('date_matche')
+            ->take(5)
+            ->get();
+
         $classement = $equipe->classements()
             ->with('sport')
             ->first();
@@ -133,6 +151,16 @@ class EquipeController extends Controller
      */
     public function destroy(Equipe $equipe)
     {
-        //
+        // Delete the team's logo if it exists
+        if ($equipe->logo) {
+            Storage::disk('public')->delete($equipe->logo);
+        }
+
+        // Delete the team and its relationships
+        $equipe->delete();
+
+        return redirect()
+            ->route('equipes.index')
+            ->with('success', 'Équipe supprimée avec succès.');
     }
 }

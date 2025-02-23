@@ -53,19 +53,9 @@ class SportController extends Controller
      */
     public function show(Sport $sport)
     {
-        $topEquipes = Classement::where('sport_id', $sport->id)
-            ->orderBy('rang')
+        $classements = Classement::where('sport_id', $sport->id)
+            ->orderBy('points', 'desc')
             ->with('equipe')
-            ->take(5)
-            ->get();
-
-        $equipes = $sport->equipes()
-            ->take(5)
-            ->get();
-
-        $joueurs = $sport->joueurs()
-            ->with('equipe')
-            ->take(5)
             ->get();
 
         $matches = $sport->matches()
@@ -74,7 +64,7 @@ class SportController extends Controller
             ->take(5)
             ->get();
 
-        return view('sports.show', compact('sport', 'topEquipes', 'equipes', 'joueurs', 'matches'));
+        return view('sports.show', compact('sport', 'classements', 'matches'));
     }
 
     /**

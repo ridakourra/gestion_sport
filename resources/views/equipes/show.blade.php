@@ -111,13 +111,16 @@
                                 </div>
                                 <div>
                                     @if($match->resultat)
-                                    <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">
-                                        {{ $match->resultat->score_equipe1 }} - {{ $match->resultat->score_equipe2 }}
-                                    </span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                                            {{ $match->resultat->score_equipe1 }} - {{ $match->resultat->score_equipe2 }}
+                                        </span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                                            {{ $match->statut }}
+                                        </span>
                                     @else
-                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
-                                        {{ $match->statut }}
-                                    </span>
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
+                                            {{ $match->statut }}
+                                        </span>
                                     @endif
                                 </div>
                             </div>

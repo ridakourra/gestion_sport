@@ -105,13 +105,23 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse($matchesRecents ?? [] as $match)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $match->date }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $match->equipe1 }} vs {{ $match->equipe2 }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $match->sport }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $match->date_matche }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $match->equipe1->nom }} vs {{ $match->equipe2->nom }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $match->sport->nom }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        {{ $match->statut }}
-                                    </span>
+                                    @if($match->statut === 'completed' && $match->resultat)
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                            {{ $match->resultat->score_equipe1 }} - {{ $match->resultat->score_equipe2 }}
+                                        </span>
+                                    @elseif($match->statut === 'in progress')
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                                            En cours
+                                        </span>
+                                    @else
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                            En attente
+                                        </span>
+                                    @endif
                                 </td>
                             </tr>
                             @empty

@@ -15,6 +15,9 @@ class Matche extends Model
         'statut',
     ];
 
+    protected $casts = [
+        'date_matche' => 'datetime',
+    ];
 
     // sport
     function sport()

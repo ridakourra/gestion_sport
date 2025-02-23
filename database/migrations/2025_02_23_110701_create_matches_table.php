@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('equipe2_id')->constrained('equipes')->onDelete('cascade');
             $table->dateTime('date_matche');
             $table->string('lieu');
-            $table->enum('statut', ['pending', '', 'completed'])->default('pending');
+            $table->enum('statut', ['pending', 'in progress', 'completed'])->default('pending');
             $table->timestamps();
         });
     }

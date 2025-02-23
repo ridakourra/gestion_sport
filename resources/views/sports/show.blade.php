@@ -1,3 +1,4 @@
+<!-- filepath: /c:/Users/Rida/3D Objects/Projects/Laravel/Gestion de Sport/gestion_project/resources/views/sports/show.blade.php -->
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
@@ -36,35 +37,47 @@
                 </div>
             </div>
 
-            <!-- Top 5 Équipes (Classement) -->
+            <!-- Classement -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <h3 class="text-lg font-semibold mb-4">{{ __('Top 5 Équipes') }}</h3>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-4">Classement</h3>
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rang</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Équipe</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Points</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">V/N/D</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Position</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Équipe</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Points</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">V</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">N</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">D</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach($topEquipes as $classement)
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $classement->rang }}</td>
+                                @foreach($classements as $key => $classement)
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <span class="font-semibold">{{ $key + 1 }}</span>
+                                        </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                                 @if($classement->equipe->logo)
-                                                    <img src="{{ Storage::url($classement->equipe->logo) }}" alt="{{ $classement->equipe->nom }}" class="w-8 h-8 rounded-full mr-2">
+                                                    <img src="{{ Storage::url($classement->equipe->logo) }}" alt="{{ $classement->equipe->nom }}" class="w-8 h-8 rounded-full mr-3">
                                                 @endif
-                                                {{ $classement->equipe->nom }}
+                                                <span class="text-sm font-medium text-gray-900">{{ $classement->equipe->nom }}</span>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $classement->points }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $classement->vics }}/{{ $classement->nuls }}/{{ $classement->los }}
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold">
+                                            {{ $classement->points }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $classement->vics }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $classement->nuls }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $classement->los }}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -74,56 +87,11 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Équipes -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-lg font-semibold">{{ __('Équipes') }}</h3>
-                            <a href="{{ route('equipes.index') }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Voir tout') }}</a>
-                        </div>
-                        <div class="space-y-4">
-                            @foreach($equipes as $equipe)
-                                <div class="flex items-center space-x-4">
-                                    @if($equipe->logo)
-                                        <img src="{{ Storage::url($equipe->logo) }}" alt="{{ $equipe->nom }}" class="w-10 h-10 rounded-full">
-                                    @endif
-                                    <span>{{ $equipe->nom }}</span>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Joueurs -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-lg font-semibold">{{ __('Joueurs') }}</h3>
-                            <a href="{{ route('joueurs.index') }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Voir tout') }}</a>
-                        </div>
-                        <div class="space-y-4">
-                            @foreach($joueurs as $joueur)
-                                <div class="flex items-center space-x-4">
-                                    @if($joueur->image)
-                                        <img src="{{ Storage::url($joueur->image) }}" alt="{{ $joueur->name }}" class="w-10 h-10 rounded-full">
-                                    @endif
-                                    <div>
-                                        <div>{{ $joueur->name }}</div>
-                                        <div class="text-sm text-gray-500">{{ $joueur->equipe->nom }}</div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Matches Récents -->
-            <div class="mt-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-semibold">{{ __('Matches Récents') }}</h3>
+                        <h3 class="text-xl font-bold">{{ __('Matches Récents') }}</h3>
                         <a href="{{ route('matches.index') }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Voir tout') }}</a>
                     </div>
                     <div class="space-y-4">
@@ -131,19 +99,23 @@
                             <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                 <div class="flex items-center space-x-4">
                                     <div class="text-sm text-gray-500">{{ $match->date_matche->format('d/m/Y H:i') }}</div>
-                                    <div>{{ $match->equipe1->nom }} vs {{ $match->equipe2->nom }}</div>
+                                    <div class="flex items-center space-x-3">
+                                        <span class="font-medium">{{ $match->equipe1->nom }}</span>
+                                        @if($match->resultat)
+                                            <span class="px-3 py-1 bg-gray-100 rounded-lg font-semibold">
+                                                {{ $match->resultat->score_equipe1 }} - {{ $match->resultat->score_equipe2 }}
+                                            </span>
+                                        @endif
+                                        <span class="font-medium">{{ $match->equipe2->nom }}</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    @if($match->resultat)
-                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">
-                                            {{ $match->resultat->score_equipe1 }} - {{ $match->resultat->score_equipe2 }}
-                                        </span>
-                                    @else
-                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
-                                            {{ $match->statut }}
-                                        </span>
-                                    @endif
-                                </div>
+                                <span class="px-3 py-1 text-sm rounded-full {{ 
+                                    $match->statut === 'completed' ? 'bg-green-100 text-green-800' : 
+                                    ($match->statut === 'in_progress' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800') 
+                                }}">
+                                    {{ $match->statut === 'completed' ? 'Terminé' : 
+                                       ($match->statut === 'in_progress' ? 'En cours' : 'À venir') }}
+                                </span>
                             </div>
                         @endforeach
                     </div>

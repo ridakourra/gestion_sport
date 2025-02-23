@@ -15,8 +15,37 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-100 overflow-x-hidden">
             @include('layouts.navigation')
+
+
+            {{-- Flashes messages --}}
+            @if(session('success'))
+                {{-- success --}}
+                <div id="flash" class="absolute right-8 top-8 p-3 visible opacity-100 transition-all duration-[2s] bg-green-500 flex gap-3 items-center justify-center rounded-md text-white w-max">
+                    <span>
+                        {{session('success')}}
+                    </span>
+                    <i onclick="handleFlash(this.parentElement)" class="fas fa-close"></i>
+                </div>
+            @elseif(session('warning'))
+                {{-- warning --}}
+                <div id="flash" class="absolute right-8 top-8 p-3 visible opacity-100 transition-all duration-[2s] bg-yellow-500 flex gap-3 items-center justify-center rounded-md text-white w-max">
+                    <span>
+                        {{session('warning')}}
+                    </span>
+                    <i onclick="handleFlash(this.parentElement)" class="fas fa-close"></i>
+                </div>
+            @elseif(session('error'))
+                {{-- error --}}
+                <div id="flash" class="absolute right-8 top-8 p-3 visible opacity-100 transition-all duration-[2s] bg-red-500 flex gap-3 items-center justify-center rounded-md text-white w-max">
+                    <span>
+                        {{session('error')}}
+                    </span>
+                    <i onclick="handleFlash(this.parentElement)" class="fas fa-close"></i>
+                </div>
+            @endif
+            
 
             <!-- Page Heading -->
             @isset($header)
@@ -32,5 +61,22 @@
                 {{ $slot }}
             </main>
         </div>
+
+
+        <script>
+            function handleFlash(parent){
+                parent.classList.remove('opacity-100')
+                parent.classList.add('opacity-0')
+            }
+
+            @if(session('success') || session('warming') || session('error'))
+                setTimeout(() => {
+                    document.getElementById('flash').classList.add('opacity-0')
+                    document.getElementById('flash').classList.remove('opacity-100')
+                }, 3000);
+            @endif
+
+        </script>
+
     </body>
 </html>
