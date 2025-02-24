@@ -14,14 +14,24 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <p class="text-3xl font-bold text-purple-700"><a href="/">HOME</a></p>
-            </div>
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+    <body class="font-sans text-gray-900 antialiased w-screen min-h-screen overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0">
+            <img src="{{ asset('storage/sports/test.gif') }}" alt="Background" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-500/50 to-indigo-600/50 backdrop-blur-sm"></div>
         </div>
+        <main class="w-full min-h-screen flex relative">
+            <!-- Home Link -->
+            <div class="absolute top-4 left-4 z-10">
+                <a href="/" 
+                class="group flex items-center space-x-2 px-4 py-2 text-white hover:text-gray-200 bg-white/10 rounded-lg backdrop-blur-sm transition duration-150 ease-in-out">
+                    <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-150" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    <span class="text-sm font-medium">Return Home</span>
+                </a>
+            </div>
+            {{$slot}}
+        </main>
     </body>
 </html>

@@ -1,7 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 p-2 flex justify-between items-center">
     <x-logo></x-logo>
     <div class="flex gap-3">
-        
         @auth
             <x-nav-link href="{{route('admin.dashboard')}}">Dashboard</x-nav-link>
             <x-nav-link href="{{route('sports.index')}}">Sports</x-nav-link>
