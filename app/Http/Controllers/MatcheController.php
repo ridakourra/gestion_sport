@@ -6,6 +6,8 @@ use App\Models\Matche;
 use App\Models\Sport;
 use App\Models\Equipe;
 use App\Models\Resultat;
+use App\Models\User;
+use App\Notifications\NewMatchScheduled;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -66,7 +68,7 @@ class MatcheController extends Controller
             'lieu' => 'required|string|max:255',
         ]);
 
-        $match = Matche::create($validated);
+        $matche = Matche::create($validated);
 
         // Only create result if scores are provided
         if ($request->filled(['score_equipe1', 'score_equipe2'])) {
@@ -74,8 +76,16 @@ class MatcheController extends Controller
                 'score_equipe1' => $request->score_equipe1,
                 'score_equipe2' => $request->score_equipe2
             ]);
-            $match->resultat()->save($resultat);
+            $matche->resultat()->save($resultat);
         }
+
+        $matche->load(['sport', 'equipe1', 'equipe2']);
+
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->notify(new NewMatchScheduled($matche));
+        }
+
 
         return redirect()
             ->route('matches.index')
