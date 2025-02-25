@@ -37,11 +37,25 @@ class MatcheController extends Controller
         }
 
         // Filter by date range
-        if ($request->filled('date_debut')) {
-            $query->whereDate('date_matche', '>=', $request->date_debut);
+        if ($request->filled('date_begin')) {
+            $query->whereDate('date_matche', '>=', $request->date_begin);
         }
-        if ($request->filled('date_fin')) {
-            $query->whereDate('date_matche', '<=', $request->date_fin);
+        if ($request->filled('date_end')) {
+            $query->whereDate('date_matche', '<=', $request->date_end);
+        }
+
+        // sort by nom and age and sport and equipe
+        if ($request->filled('sort')) {
+            $column = explode('-', $request->sort)[0];
+            $direction = explode('-', $request->sort)[1];
+            switch ($column) {
+                case 'sport':
+                    $query->orderBy(Sport::select('nom')->whereColumn('sports.id', 'matches.sport_id', $direction));
+                    break;
+                default:
+                    $query->orderBy($column, $direction);
+                    break;
+            }
         }
 
         $matches = $query->orderBy('date_matche', 'desc')->paginate(10);

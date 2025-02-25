@@ -63,10 +63,38 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Photo</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de naissance</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sport</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Équipe</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom
+                            <a href="{{ route('joueurs.index', array_merge(request()->query(), ['sort' => 'name-asc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                            <a href="{{ route('joueurs.index', array_merge(request()->query(), ['sort' => 'name-desc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de naissance
+                            <a href="{{ route('joueurs.index', array_merge(request()->query(), ['sort' => 'birthday-asc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                            <a href="{{ route('joueurs.index', array_merge(request()->query(), ['sort' => 'birthday-desc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sport
+                            <a href="{{ route('joueurs.index', array_merge(request()->query(), ['sort' => 'sport-asc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                            <a href="{{ route('joueurs.index', array_merge(request()->query(), ['sort' => 'sport-desc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Équipe
+                            <a href="{{ route('joueurs.index', array_merge(request()->query(), ['sort' => 'equipe-asc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                            <a href="{{ route('joueurs.index', array_merge(request()->query(), ['sort' => 'equipe-desc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                        </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>

@@ -16,6 +16,7 @@ class EquipeController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request->query());
         $query = Equipe::query()
             ->with(['sport'])
             ->withCount('joueurs');
@@ -28,6 +29,20 @@ class EquipeController extends Controller
         // Filter by sport
         if ($request->filled('sport')) {
             $query->where('sport_id', $request->sport);
+        }
+
+        // Trier by columns table
+        if ($request->filled('sort')) {
+            $sort = explode('-', $request->sort);
+            $column = $sort[0];
+            $direction = $sort[1];
+            if ($column === 'sport') {
+                $query->orderBy(Sport::select('nom')->whereColumn('sports.id', 'equipes.sport_id'), $direction);
+            } else if ($column === 'joueurs') {
+                $query->orderBy('joueurs_count', $direction);
+            } else {
+                $query->orderBy($column, $direction);
+            }
         }
 
         $equipes = $query->latest()->paginate(5);

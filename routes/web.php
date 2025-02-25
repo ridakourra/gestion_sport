@@ -8,6 +8,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SportController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('test', function () {
+    // dd(array_merge(request()->query(), ['test' => 'csac']));
+    return view('test');
+})->name('test');
+
 Route::get('/', function () {
     return view('welcome');
 });

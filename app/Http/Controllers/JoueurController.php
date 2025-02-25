@@ -13,25 +13,41 @@ class JoueurController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Joueur::query()
-            ->with(['sport', 'equipe']);
+        $query = Joueur::query()->with(['sport', 'equipe']);
 
-        // Search by name
+        // search by name
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('nom', 'like', "%$request->search%");
         }
 
-        // Filter by sport
+        // search by sport
         if ($request->filled('sport')) {
             $query->where('sport_id', $request->sport);
         }
 
-        // Filter by team
+        // search by Equipe
         if ($request->filled('equipe')) {
             $query->where('equipe_id', $request->equipe);
         }
 
-        $joueurs = $query->latest()->paginate(10);
+        // sort by nom and age and sport and equipe
+        if ($request->filled('sort')) {
+            $column = explode('-', $request->sort)[0];
+            $direction = explode('-', $request->sort)[1];
+            switch ($column) {
+                case 'sport':
+                    $query->orderBy(Sport::select('nom')->whereColumn('sports.id', 'joueurs.sport_id', $direction));
+                    break;
+                case 'equipe':
+                    $query->orderBy(Equipe::select('nom')->whereColumn('equipes.id', 'joueurs.equipe_id', $direction));
+                    break;
+                default:
+                    $query->orderBy($column, $direction);
+                    break;
+            }
+        }
+
+        $joueurs = $query->latest()->paginate(5);
         $sports = Sport::all();
         $equipes = Equipe::all();
 

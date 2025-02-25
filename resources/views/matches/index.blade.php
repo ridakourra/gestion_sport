@@ -12,6 +12,22 @@
         <!-- Search and Filters -->
         <div class="mb-6 bg-white rounded-lg shadow-sm p-4">
             <form action="{{ route('matches.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Date Begin Filter -->
+                <div class="col-span-1 md:col-span-1 lg:col-span-2">
+                    <label for="date_begin" class="block text-sm font-medium text-gray-700">Date de début</label>
+                    <input type="date" name="date_begin" id="date_begin" 
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+                           value="{{ request('date_begin') }}">
+                </div>
+
+                <!-- Date End Filter -->
+                <div class="col-span-1 md:col-span-1 lg:col-span-2">
+                    <label for="date_end" class="block text-sm font-medium text-gray-700">Date de fin</label>
+                    <input type="date" name="date_end" id="date_end" 
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+                           value="{{ request('date_end') }}">
+                </div>
+
                 <!-- Status Filter -->
                 <div>
                     <select name="statut" 
@@ -67,10 +83,31 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sport</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date
+                            <a href="{{ route('matches.index', array_merge(request()->query(), ['sort' => 'date_matche-asc'])) }}">
+                                <i class="fas fa-sort-alpha-down"></i>
+                            </a>
+                            <a href="{{ route('matches.index', array_merge(request()->query(), ['sort' => 'date_matche-desc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sport
+                            <a href="{{ route('matches.index', array_merge(request()->query(), ['sort' => 'sport-asc'])) }}">
+                                <i class="fas fa-sort-alpha-down"></i>
+                            </a>
+                            <a href="{{ route('matches.index', array_merge(request()->query(), ['sort' => 'sport-desc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                        </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Équipes</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lieu</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lieu
+                            <a href="{{ route('matches.index', array_merge(request()->query(), ['sort' => 'lieu-asc'])) }}">
+                                <i class="fas fa-sort-alpha-down"></i>
+                            </a>
+                            <a href="{{ route('matches.index', array_merge(request()->query(), ['sort' => 'lieu-desc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                        </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut/Score</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>

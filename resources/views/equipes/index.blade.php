@@ -12,6 +12,7 @@
         <!-- Search and Filters -->
         <div class="mb-6 bg-white rounded-lg shadow-sm p-4">
             <form action="{{ route('equipes.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {{-- Search --}}
                 <div class="relative">
                     <input type="text" 
                            name="search" 
@@ -20,6 +21,7 @@
                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
+                {{-- Tous sports --}}
                 <div>
                     <select name="sport" 
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
@@ -32,6 +34,7 @@
                     </select>
                 </div>
 
+                {{-- Button filter and renialiser --}}
                 <div class="flex items-center space-x-4">
                     <button type="submit" 
                             class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
@@ -42,6 +45,7 @@
                         <i class="fas fa-redo mr-2"></i> Réinitialiser
                     </a>
                 </div>
+
             </form>
         </div>
 
@@ -51,9 +55,33 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Logo</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Équipe</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sport</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joueurs</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Équipe
+                            <a href="{{ route('equipes.index', array_merge(request()->query(), ['sort' => 'nom-asc'])) }}">
+                                <i class="fas fa-sort-alpha-down"></i>
+                            </a>
+                            <a href="{{ route('equipes.index', array_merge(request()->query(), ['sort' => 'nom-desc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Sport
+                            <a href="{{ route('equipes.index', array_merge(request()->query(), ['sort' => 'sport-asc'])) }}">
+                                <i class="fas fa-sort-alpha-down"></i>
+                            </a>
+                            <a href="{{ route('equipes.index', array_merge(request()->query(), ['sort' => 'sport-desc'])) }}">
+                                <i class="fas fa-sort-alpha-up"></i>
+                            </a>
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Joueurs
+                            <a href="{{ route('equipes.index', array_merge(request()->query(), ['sort' => 'joueurs-asc'])) }}">
+                                <i class="fas fa-sort-numeric-down"></i>
+                            </a>
+                            <a href="{{ route('equipes.index', array_merge(request()->query(), ['sort' => 'joueurs-desc'])) }}">
+                                <i class="fas fa-sort-numeric-up"></i>
+                            </a>
+                        </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
