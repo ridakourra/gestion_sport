@@ -68,8 +68,8 @@ class UpdateMatchStatus extends Command
                     // equipe 1 win
                     $classement_equipe1->points += 3;
                     $classement_equipe1->vics += 1;
-                    // equipe 1 lose
-                    $classement_equipe1->los += 1;
+                    // equipe 2 lose
+                    $classement_equipe2->los += 1;
                 } elseif ($score1 < $score2) {
                     // equipe 2 win
                     $classement_equipe2->points += 3;
