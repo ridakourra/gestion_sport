@@ -99,13 +99,15 @@
                                 </div>
                                 <div>
                                     @if($match->resultat)
-                                    <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">
-                                        {{ $match->resultat->score_equipe1 }} - {{ $match->resultat->score_equipe2 }}
-                                    </span>
-                                    @else
-                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
-                                        {{ $match->statut }}
-                                    </span>
+                                        @if($match->statut === 'completed')
+                                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                                                {{ $match->resultat->score_equipe1 }} - {{ $match->resultat->score_equipe2 }}
+                                            </span>
+                                        @else
+                                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
+                                                {{ $match->statut === 'pending' ? 'En attente' : 'En cours'  }}
+                                            </span>
+                                        @endif
                                     @endif
                                 </div>
                             </div>

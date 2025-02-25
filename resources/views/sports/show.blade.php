@@ -114,7 +114,7 @@
                                     ($match->statut === 'in_progress' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800') 
                                 }}">
                                     {{ $match->statut === 'completed' ? 'Terminé' : 
-                                       ($match->statut === 'in_progress' ? 'En cours' : 'À venir') }}
+                                       ($match->statut === 'in progress' ? 'En cours' : 'À venir') }}
                                 </span>
                             </div>
                         @endforeach

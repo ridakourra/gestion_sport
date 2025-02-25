@@ -58,7 +58,7 @@ class MatcheController extends Controller
             }
         }
 
-        $matches = $query->orderBy('date_matche', 'desc')->paginate(10);
+        $matches = $query->orderBy('date_matche', 'desc')->paginate(5);
         $sports = Sport::all();
         $equipes = Equipe::all();
 
